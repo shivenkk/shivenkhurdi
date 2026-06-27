@@ -27,8 +27,8 @@ const mono = Space_Mono({
   display: "swap",
 });
 
-// NOTE: update this to your real domain before deploying (used for OG/canonical).
-const SITE_URL = "https://shivenkhurdi.com";
+// Live site URL (used for OG/canonical). Update if you add a custom domain.
+const SITE_URL = "https://shivenkhurdi.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
