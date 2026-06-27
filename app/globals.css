@@ -217,8 +217,65 @@ html.lenis body {
    This is a personal portfolio whose identity is its motion, so the one-shot
    reveals, custom cursor, and smooth scroll are intentionally kept. We only
    calm the continuous ambient motion (film-grain shimmer) for comfort. */
+/* ---------- Neon border tracer (spiral cards) ---------- */
+.neon-trace {
+  stroke-dasharray: 52 1040;
+  animation: neon-trace 3.1s linear infinite;
+  filter: drop-shadow(0 0 5px rgba(198, 255, 58, 0.9));
+}
+@keyframes neon-trace {
+  to {
+    stroke-dashoffset: -1092;
+  }
+}
+
+/* ---------- Holographic sheen + drifting particles ---------- */
+.sheen {
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.07) 50%,
+    transparent 65%
+  );
+  background-size: 250% 100%;
+  animation: sheen 4.5s linear infinite;
+}
+@keyframes sheen {
+  0% {
+    background-position: 160% 0;
+  }
+  100% {
+    background-position: -160% 0;
+  }
+}
+.particle {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(198, 255, 58, 0.7);
+  animation-name: particle-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+@keyframes particle-float {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.12;
+  }
+  50% {
+    transform: translateY(-26px);
+    opacity: 0.5;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .grain {
+    animation: none;
+  }
+  .neon-trace,
+  .sheen,
+  .particle {
     animation: none;
   }
 }

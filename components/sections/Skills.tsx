@@ -8,7 +8,7 @@ export default function Skills() {
   return (
     <section id="skills" className="relative px-5 py-24 sm:px-8 sm:py-36">
       <div className="mx-auto max-w-[1600px]">
-        <SectionHeader index="04" title="Capabilities" kicker="Tools & techniques" />
+        <SectionHeader index="05" title="Capabilities" kicker="Tools & techniques" />
 
         <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-2">
           {skills.map((group, i) => (

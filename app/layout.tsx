@@ -3,9 +3,7 @@ import { Bricolage_Grotesque, Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
 
 import SmoothScroll from "@/components/providers/SmoothScroll";
-import Preloader from "@/components/Preloader";
 import Cursor from "@/components/Cursor";
-import Navbar from "@/components/Navbar";
 import { profile, socials } from "@/lib/data";
 
 const display = Bricolage_Grotesque({
@@ -84,10 +82,8 @@ export default function RootLayout({
     >
       <body className="bg-ink text-paper antialiased">
         <SmoothScroll>
-          <Preloader />
           <Cursor />
           <div className="grain" aria-hidden />
-          <Navbar />
           <main>{children}</main>
         </SmoothScroll>
       </body>

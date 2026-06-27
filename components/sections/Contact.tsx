@@ -28,7 +28,7 @@ export default function Contact() {
 
       <div className="relative z-10 mx-auto max-w-[1600px]">
         <div className="mb-8 flex items-center gap-4">
-          <span className="font-mono text-xs text-lime">(05)</span>
+          <span className="font-mono text-xs text-lime">(06)</span>
           <span className="h-px w-12 bg-line sm:w-24" />
           <span className="eyebrow">Let&apos;s talk</span>
         </div>

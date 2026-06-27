@@ -45,7 +45,7 @@ export default function Work() {
       className="relative px-5 py-24 sm:px-8 sm:py-36"
     >
       <div className="mx-auto max-w-[1600px]">
-        <SectionHeader index="03" title="Selected Work" kicker="Things I've built" />
+        <SectionHeader index="04" title="Selected Projects" kicker="Things I've built" />
 
         <div className="border-t border-line">
           {projects.map((p, i) => {
