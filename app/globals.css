@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN SYSTEM: Shiven Khurdi Portfolio
+   Dark & immersive · electric-lime accent · editorial-grotesk
+   ============================================================ */
+
+@theme {
+  /* Surfaces (rich near-black, warmed slightly) */
+  --color-ink: #08080a;
+  --color-ink-soft: #0d0d10;
+  --color-surface: #141418;
+  --color-surface-2: #1b1b20;
+
+  /* Ink-on-dark text ramp (warm off-white) */
+  --color-paper: #ededea;
+  --color-paper-dim: #a0a09a;
+  --color-paper-faint: #87877e;
+
+  /* Lines / borders */
+  --color-line: rgba(237, 237, 234, 0.10);
+  --color-line-soft: rgba(237, 237, 234, 0.06);
+
+  /* Accent: electric lime */
+  --color-lime: #c6ff3a;
+  --color-lime-soft: #d7ff77;
+  --color-lime-deep: #a6e000;
+
+  /* Type families (provided by next/font on <html>) */
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    /* Lenis drives smoothing; keep native behavior off to avoid conflicts */
+    scroll-behavior: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--color-ink);
+  }
+
+  body {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-body);
+    font-feature-settings: "ss01", "cv01";
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-lime);
+    color: #08080a;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    text-wrap: balance;
+  }
+
+  /* Keep keyboard focus obvious; custom cursor hides only the pointer */
+  :focus-visible {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Dark, slim scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--color-ink); }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a30;
+    border-radius: 999px;
+    border: 2px solid var(--color-ink);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #3a3a42; }
+}
+
+/* ---------- Custom cursor: hide native pointer only on fine pointers ---------- */
+@media (hover: hover) and (pointer: fine) {
+  html.cursor-ready,
+  html.cursor-ready * {
+    cursor: none !important;
+  }
+}
+
+/* ---------- Typographic helpers ---------- */
+.font-display { font-family: var(--font-display); }
+.font-mono { font-family: var(--font-mono); }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-paper-dim);
+}
+
+/* Fluid display sizing used across hero / section titles */
+.display-xl { font-size: clamp(3rem, 13vw, 13rem); line-height: 0.88; }
+.display-lg { font-size: clamp(2.4rem, 8vw, 7rem); }
+.display-md { font-size: clamp(2rem, 5vw, 4rem); }
+
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* ---------- Animated lime underline for links ---------- */
+.link-line {
+  position: relative;
+  display: inline-block;
+}
+.link-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: var(--color-lime);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s var(--ease-out-expo);
+}
+.link-line:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ---------- Film grain overlay ---------- */
+.grain {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 0.6s steps(2) infinite;
+  will-change: transform;
+}
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-4%, 2%); }
+  50% { transform: translate(3%, -3%); }
+  75% { transform: translate(-2%, 4%); }
+  100% { transform: translate(2%, -2%); }
+}
+
+/* ---------- Ambient lime glow ---------- */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---------- Marquee ---------- */
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 28s) linear infinite;
+}
+.marquee.reverse { animation-direction: reverse; }
+.marquee-track:hover .marquee { animation-play-state: paused; }
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- Reveal masks (for split-line text) ---------- */
+.reveal-mask { overflow: hidden; display: block; }
+
+/* ---------- Noise-free elevated card ---------- */
+.card-line {
+  border: 1px solid var(--color-line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+}
+
+/* ---------- Lenis smooth-scroll recommended styles ---------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ---------- Reduced motion ----------
+   This is a personal portfolio whose identity is its motion, so the one-shot
+   reveals, custom cursor, and smooth scroll are intentionally kept. We only
+   calm the continuous ambient motion (film-grain shimmer) for comfort. */
+@media (prefers-reduced-motion: reduce) {
+  .grain {
+    animation: none;
+  }
+}
