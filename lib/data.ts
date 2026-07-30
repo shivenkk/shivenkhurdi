@@ -26,7 +26,11 @@ export const socials = {
   phoneHref: "tel:+16172596437",
   linkedin: "https://www.linkedin.com/in/shivenkhurdi/",
   github: "https://github.com/shivenkk",
-  resume: "/Shiven_CV.pdf",
+  // Résumé links point at a real page, not the raw PDF: browsers with their
+  // built-in PDF viewer disabled or blocked render a blank tab for a direct
+  // .pdf URL. /resume embeds the file and always offers open/download.
+  resume: "/resume",
+  resumeFile: "/Shiven_CV.pdf",
 };
 
 export type Project = {

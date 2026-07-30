@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Inter, Space_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 import SmoothScroll from "@/components/providers/SmoothScroll";
@@ -86,6 +87,7 @@ export default function RootLayout({
           <div className="grain" aria-hidden />
           <main>{children}</main>
         </SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );
