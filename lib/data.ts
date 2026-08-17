@@ -12,11 +12,11 @@ export const profile = {
   locationNote: "Open to relocate",
   status: "AI Engineer @ Interlock Systems · Harvard Innovation Labs",
   tagline:
-    "I design and ship AI systems across LLMs, multi-agent platforms, and computer-vision pipelines, built to hold up in production.",
+    "I build AI systems end to end, from pretraining a language model from scratch to shipping agents into a customer’s production ERP, and I measure what they actually do rather than what they’re supposed to.",
   about: [
-    "I’m a Master’s student in Artificial Intelligence at Northeastern University, focused on building LLM and multi-agent systems that are reliable, cost-aware, and grounded in real evaluation, not just demos.",
-    "My work spans the modern AI stack: fine-tuning and quantization (QLoRA, PEFT), retrieval and RAG, agentic tool-use, conformal prediction, and computer vision, paired with the engineering to ship it, from FastAPI services and Dockerized AWS deployments to React and Next.js dashboards.",
-    "Right now I’m an AI Engineer at Interlock Systems (Harvard Innovation Labs), building computer-vision verification and multi-agent automation for engineering workflows. Before Boston, I earned my CS degree at BITS Pilani’s Dubai campus.",
+    "I’m a Master’s student in Artificial Intelligence at Northeastern University, and most of my work circles one question: how do you know a result is real. That applies whether the thing being measured is a model I trained or an agent about to write to someone’s database.",
+    "I’ve built across the stack, from a 394M-parameter language model pretrained from scratch (its corpus, tokenizer, architecture, and training loop) to fine-tuning and quantization, retrieval and RAG, agentic tool-use, constraint optimization, and computer vision, paired with the engineering to ship it: FastAPI services, Dockerized AWS deployments, and React and Next.js front ends.",
+    "Two of those projects are now papers under review at NeurIPS 2026 workshops, and in both the headline finding went against what I was hoping for. Right now I’m an AI Engineer at Interlock Systems (Harvard Innovation Labs), building computer-vision verification and agent automation over customers’ production ERP systems. Before Boston, I earned my CS degree at BITS Pilani’s Dubai campus.",
   ],
 };
 
@@ -51,8 +51,48 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    id: "modelrouter",
+    id: "sqlpup",
     index: "01",
+    title: "sqlpup",
+    subtitle: "394M Text-to-SQL Model Built From Scratch",
+    year: "2026",
+    category: "LLM · Pretraining · Research",
+    blurb: "A language model built end to end for under $1,000.",
+    description:
+      "A 394M-parameter text-to-SQL decoder where every stage is built for this one task: a 9.67B-token corpus, a byte-level BPE tokenizer, a Llama-style GQA architecture, a preemption-safe 4-GPU training loop, and a sandboxed execution-accuracy harness. No pretrained weights anywhere in the stack.",
+    highlights: [
+      "23.51% ± 0.38 execution accuracy on BIRD dev after fine-tuning plus GRPO over an execution reward",
+      "Against an industrially pretrained control matched to 0.8% on non-embedding parameters, test-time compute widened the gap (5.87 → 8.65 points) instead of closing it",
+      "Corpus, 32,768-entry tokenizer, and training loop all built from scratch, with exact-resume checkpointing that survives spot preemption",
+      "Shipped to PyPI and Hugging Face with 543 tests and CI; paper under review at a NeurIPS 2026 workshop",
+    ],
+    stack: ["PyTorch", "DDP", "GRPO", "Hugging Face", "AWS", "PyPI"],
+    metric: { value: "23.51%", label: "BIRD dev execution accuracy" },
+    links: { code: "https://github.com/shivenkk/sqlpup" },
+  },
+  {
+    id: "agentrelbench",
+    index: "02",
+    title: "AgentRelBench",
+    subtitle: "Reliability Instrument for Action-Taking LLM Agents",
+    year: "2026",
+    category: "Agents · Evaluation · Research",
+    blurb: "Does an agent cause damage repeatably? Measured, not assumed.",
+    description:
+      "An instrument that prices agent damage from database state diffs, deterministically and with no LLM judge anywhere in the measurement path, then measures whether that damage repeats across runs. Built over EnterpriseOps-Gym (ServiceNow AI Research and Mila).",
+    highlights: [
+      "Pre-registered campaign of 2,128 runs across 33 tasks and nine models in six model families",
+      "Damage appeared in every family and was stochastic inside every damage-producing cell; no task damaged on every run, so one-shot audits are structurally blind to it",
+      "Demote criteria written before data collection fired against the intended headline, and that demotion is reported in the paper",
+      "176 tests and one-command reproduction; the estimator core ships separately as evalpower, a zero-dependency library",
+    ],
+    stack: ["Python", "Clopper-Pearson", "Docker", "Pre-registration", "CI"],
+    metric: { value: "2,128", label: "pre-registered agent runs" },
+    links: { code: "https://github.com/shivenkk/agentrelbench" },
+  },
+  {
+    id: "modelrouter",
+    index: "03",
     title: "ModelRouter",
     subtitle: "Multi-Model Inference Cost Optimizer",
     year: "2026",
@@ -72,7 +112,7 @@ export const projects: Project[] = [
   },
   {
     id: "reproagent",
-    index: "02",
+    index: "04",
     title: "ReproAgent",
     subtitle: "ML Paper Reproducibility Analysis",
     year: "2026",
@@ -92,7 +132,7 @@ export const projects: Project[] = [
   },
   {
     id: "calibratedreturns",
-    index: "03",
+    index: "05",
     title: "CalibratedReturns",
     subtitle: "Stock Predictions with Coverage Guarantees",
     year: "2026",
@@ -112,7 +152,7 @@ export const projects: Project[] = [
   },
   {
     id: "nyc-taxi",
-    index: "04",
+    index: "06",
     title: "NYC Taxi Demand",
     subtitle: "City-Scale Spatiotemporal Forecasting",
     year: "2025",
@@ -132,7 +172,7 @@ export const projects: Project[] = [
   },
   {
     id: "volleyball",
-    index: "05",
+    index: "07",
     title: "Group Activity Recognition",
     subtitle: "Volleyball Video Analysis & Rally Prediction",
     year: "2025",
@@ -153,7 +193,7 @@ export const projects: Project[] = [
   },
   {
     id: "qlora",
-    index: "06",
+    index: "08",
     title: "QLoRA Fine-Tuning",
     subtitle: "Efficient Llama-2 Tuning Under Constraints",
     year: "2024",
@@ -195,9 +235,11 @@ export const experience: Experience[] = [
     period: "Jun 2026 - Present",
     current: true,
     points: [
-      "Building a computer-vision pipeline that flags placement, orientation, and sizing discrepancies between technical design files and their specs, using a fine-tuned object detector with a deterministic verification layer that abstains under uncertainty instead of emitting a false verdict.",
-      "Developing agent capabilities, prompts, and integrations for a multi-agent platform that extracts data from engineering documentation (drawings, CAD, BOMs) and autonomously executes actions in customer ERP/MRP systems.",
-      "Building evaluation harnesses and benchmarks measuring agent performance across extraction, reasoning, and tool-use tasks.",
+      "Shipped an on-prem application over a manufacturing customer’s production ERP. Their project managers now use it daily to reschedule deliveries and revise work orders, replacing hours of manual ERP screen work, with every write reversible through a logged undo verified against the live database.",
+      "Designed its natural-language search so the model routes a request but never computes the answer, which means a wrong number cannot ship silently: 97.5% routing accuracy, certified on the production box, model running locally with no customer data leaving the building.",
+      "Built a turnaround-planning optimizer for a Fortune-500 manufacturer: CP-SAT scope and schedule solvers over customer planning workbooks, plus an LLM copilot that turns plain English into a typed constraint, re-solves, and returns a measured before/after receipt for human approval. 400 tests.",
+      "Built a computer-vision pipeline for a textile manufacturer that flags placement, orientation, and sizing discrepancies against spec, using a fine-tuned detector with a deterministic verification layer that abstains under uncertainty instead of emitting a false verdict.",
+      "Built the agent capabilities and integrations for a multi-agent platform that extracts data from engineering documentation (drawings, CAD, BOMs) and executes actions in customer ERP/MRP systems, plus the evaluation harnesses that measure it across extraction, reasoning, and tool-use tasks.",
     ],
   },
   {
@@ -252,7 +294,7 @@ export const education: Education[] = [
     degree: "M.S. Artificial Intelligence",
     detail: "Graduate study",
     location: "Boston, MA",
-    period: "Jan 2025 - Present",
+    period: "Jan 2025 - Apr 2027",
     gpa: "GPA 3.9",
     coursework: [
       "Foundations of AI",
@@ -296,6 +338,10 @@ export const skills: { group: string; items: string[] }[] = [
       "Scikit-learn",
       "XGBoost",
       "Hugging Face Transformers",
+      "Pretraining from Scratch",
+      "Distributed Training (DDP)",
+      "GRPO / RLHF",
+      "Tokenizers",
       "LLM Fine-tuning",
       "RAG",
       "NLP",
@@ -315,6 +361,9 @@ export const skills: { group: string; items: string[] }[] = [
       "Git",
       "Linux",
       "MLflow",
+      "Weights & Biases",
+      "OR-Tools CP-SAT",
+      "Ollama",
       "GitHub Actions CI/CD",
     ],
   },
@@ -328,6 +377,7 @@ export const skills: { group: string; items: string[] }[] = [
       "LangChain",
       "FAISS",
       "PostgreSQL",
+      "SQLAlchemy",
       "MongoDB",
       "React.js",
       "Next.js",
@@ -342,6 +392,8 @@ export const marqueeWords = [
   "RAG",
   "Computer Vision",
   "Fine-Tuning",
+  "Pretraining",
+  "Evaluation",
   "Generative AI",
   "PyTorch",
   "AWS",
