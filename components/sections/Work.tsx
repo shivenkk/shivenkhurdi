@@ -170,6 +170,17 @@ export default function Work() {
                                 <Code size={16} /> View code
                               </a>
                             )}
+                            {p.links.paper && (
+                              <a
+                                href={p.links.paper}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-paper transition-colors hover:border-lime hover:text-lime"
+                              >
+                                Read paper <ArrowUpRight size={16} />
+                              </a>
+                            )}
                             {p.links.live && (
                               <a
                                 href={p.links.live}

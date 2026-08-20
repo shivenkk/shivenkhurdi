@@ -46,7 +46,7 @@ export type Project = {
   highlights: string[];
   stack: string[];
   metric: { value: string; label: string };
-  links: { code?: string; live?: string };
+  links: { code?: string; live?: string; paper?: string };
 };
 
 export const projects: Project[] = [
@@ -84,11 +84,14 @@ export const projects: Project[] = [
       "Pre-registered campaign of 2,128 runs across 33 tasks and nine models in six model families",
       "Damage appeared in every family and was stochastic inside every damage-producing cell; no task damaged on every run, so one-shot audits are structurally blind to it",
       "Demote criteria written before data collection fired against the intended headline, and that demotion is reported in the paper",
-      "176 tests and one-command reproduction; the estimator core ships separately as evalpower, a zero-dependency library",
+      "176 tests and one-command reproduction; preprint at arXiv:2608.15286, and the estimator core ships separately as evalpower, a zero-dependency library",
     ],
     stack: ["Python", "Clopper-Pearson", "Docker", "Pre-registration", "CI"],
     metric: { value: "2,128", label: "pre-registered agent runs" },
-    links: { code: "https://github.com/shivenkk/agentrelbench" },
+    links: {
+      code: "https://github.com/shivenkk/agentrelbench",
+      paper: "https://arxiv.org/abs/2608.15286",
+    },
   },
   {
     id: "modelrouter",
