@@ -1,89 +1,50 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  type ReactNode,
-} from "react";
-import { MotionConfig } from "framer-motion";
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { store } from "@/lib/store";
 
-type ScrollAPI = {
-  scrollTo: (target: string | number | HTMLElement, opts?: Record<string, unknown>) => void;
-  stop: () => void;
-  start: () => void;
-};
+let lenisRef: Lenis | null = null;
+export const getLenis = () => lenisRef;
 
-const ScrollCtx = createContext<ScrollAPI>({
-  scrollTo: () => {},
-  stop: () => {},
-  start: () => {},
-});
-
-export const useSmoothScroll = () => useContext(ScrollCtx);
-
-export default function SmoothScroll({ children }: { children: ReactNode }) {
-  const lenisRef = useRef<Lenis | null>(null);
+export default function SmoothScroll({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const pathname = usePathname();
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    store.reducedMotion = reduce;
 
     const lenis = new Lenis({
-      lerp: 0.1,
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 1.5,
+      lerp: reduce ? 1 : 0.09,
+      smoothWheel: !reduce,
+      syncTouch: false,
     });
-    lenisRef.current = lenis;
-
+    lenisRef = lenis;
     lenis.on("scroll", ScrollTrigger.update);
 
-    const onTick = (time: number) => lenis.raf(time * 1000);
-    gsap.ticker.add(onTick);
+    const tick = (time: number) => lenis.raf(time * 1000);
+    gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
-      gsap.ticker.remove(onTick);
+      gsap.ticker.remove(tick);
       lenis.destroy();
-      lenisRef.current = null;
+      lenisRef = null;
     };
   }, []);
 
-  const api: ScrollAPI = {
-    scrollTo: (target, opts) => {
-      const lenis = lenisRef.current;
-      if (lenis) {
-        lenis.scrollTo(target, { duration: 1.3, offset: 0, ...opts });
-        return;
-      }
-      // Reduced-motion / no-Lenis fallback
-      if (typeof target === "string") {
-        document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
-      } else if (typeof target === "number") {
-        window.scrollTo({ top: target, behavior: "smooth" });
-      } else {
-        target.scrollIntoView({ behavior: "smooth" });
-      }
-    },
-    // Lock both Lenis (if ready) and native overflow, so the lock holds
-    // regardless of provider/child effect ordering on first mount.
-    stop: () => {
-      lenisRef.current?.stop();
-      document.documentElement.style.overflow = "hidden";
-    },
-    start: () => {
-      lenisRef.current?.start();
-      document.documentElement.style.overflow = "";
-    },
-  };
+  // Route change: jump to the top and let ScrollTrigger re-measure.
+  useEffect(() => {
+    lenisRef?.scrollTo(0, { immediate: true });
+    const id = window.setTimeout(() => ScrollTrigger.refresh(), 80);
+    return () => window.clearTimeout(id);
+  }, [pathname]);
 
-  return (
-    <ScrollCtx.Provider value={api}>
-      <MotionConfig reducedMotion="never">{children}</MotionConfig>
-    </ScrollCtx.Provider>
-  );
+  return <>{children}</>;
 }

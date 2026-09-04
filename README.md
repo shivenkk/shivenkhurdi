@@ -1,11 +1,10 @@
-# Shiven Khurdi · Portfolio
+# shivenkhurdi.vercel.app
 
-Personal portfolio website for Shiven Khurdi, AI Engineer.
-
-Built with Next.js, TypeScript, Tailwind CSS, Framer Motion, GSAP, and Lenis. All content lives in `lib/data.ts`.
+Personal site. Next.js, React Three Fiber, GSAP, Lenis.
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000
-npm run build
+npm run dev
 ```
+
+Content lives in `lib/data.ts`.

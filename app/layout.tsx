@@ -1,32 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Inter, Space_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
-import SmoothScroll from "@/components/providers/SmoothScroll";
-import Cursor from "@/components/Cursor";
+import { display, mono, sans } from "@/lib/fonts";
 import { profile, socials } from "@/lib/data";
+import SmoothScroll from "@/components/providers/SmoothScroll";
+import Nav from "@/components/ui/Nav";
+import PageTransition from "@/components/ui/PageTransition";
 
-const display = Bricolage_Grotesque({
-  subsets: ["latin"],
-  variable: "--font-bricolage",
-  display: "swap",
-});
-
-const body = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const mono = Space_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-space-mono",
-  display: "swap",
-});
-
-// Live site URL (used for OG/canonical). Update if you add a custom domain.
 const SITE_URL = "https://shivenkhurdi.vercel.app";
 
 export const metadata: Metadata = {
@@ -36,7 +17,7 @@ export const metadata: Metadata = {
     template: `%s · ${profile.name}`,
   },
   description:
-    "Shiven Khurdi is an AI Engineer and M.S. Artificial Intelligence student at Northeastern University, building LLM systems, multi-agent platforms, and computer-vision pipelines.",
+    "Shiven Khurdi is an AI engineer and M.S. Artificial Intelligence student at Northeastern University in Boston, working on LLM systems, agents, and evaluation.",
   keywords: [
     "Shiven Khurdi",
     "AI Engineer",
@@ -56,20 +37,20 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: `${profile.name} · ${profile.role}`,
     description:
-      "AI Engineer building LLM systems, multi-agent platforms, and computer-vision pipelines that hold up in production.",
+      "AI engineer working on LLM systems, agents, and evaluation. Founding AI Engineer at Interlock Systems, M.S. AI at Northeastern.",
     siteName: profile.name,
   },
   twitter: {
     card: "summary_large_image",
     title: `${profile.name} · ${profile.role}`,
     description:
-      "AI Engineer building LLM systems, multi-agent platforms, and computer-vision pipelines.",
+      "AI engineer working on LLM systems, agents, and evaluation.",
   },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#08080a",
+  themeColor: "#070709",
   colorScheme: "dark",
 };
 
@@ -79,13 +60,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      className={`${display.variable} ${sans.variable} ${mono.variable}`}
     >
-      <body className="bg-ink text-paper antialiased">
+      <body className="bg-ink text-fg antialiased">
         <SmoothScroll>
-          <Cursor />
+          <Nav />
+          <PageTransition />
           <div className="grain" aria-hidden />
-          <main>{children}</main>
+          {children}
         </SmoothScroll>
         <Analytics />
       </body>

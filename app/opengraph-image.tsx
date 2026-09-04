@@ -1,10 +1,11 @@
 import { ImageResponse } from "next/og";
+import { profile } from "@/lib/data";
 
-export const alt = "Shiven Khurdi · AI Engineer";
+export const alt = `${profile.name} · ${profile.role}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpengraphImage() {
+export default function OpenGraphImage() {
   return new ImageResponse(
     (
       <div
@@ -14,83 +15,28 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          padding: "72px",
-          backgroundColor: "#08080a",
-          backgroundImage:
-            "radial-gradient(900px circle at 12% 8%, rgba(198,255,58,0.18), transparent 45%), radial-gradient(700px circle at 95% 100%, rgba(120,140,255,0.10), transparent 40%)",
-          color: "#ededea",
+          padding: 64,
+          background: "#070709",
+          color: "#e9e9e6",
           fontFamily: "sans-serif",
         }}
       >
-        {/* Top row */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            fontSize: 24,
-            letterSpacing: 4,
-            textTransform: "uppercase",
-            color: "#a0a09a",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <div
-              style={{
-                width: 16,
-                height: 16,
-                borderRadius: 999,
-                backgroundColor: "#c6ff3a",
-              }}
-            />
-            <span>Portfolio</span>
-          </div>
-          <span>Boston, MA</span>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 22, color: "#9d9d99" }}>
+          <span>{profile.role.toUpperCase()}</span>
+          <span>{profile.location.toUpperCase()}</span>
         </div>
-
-        {/* Name + role */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div
-            style={{
-              display: "flex",
-              fontSize: 150,
-              fontWeight: 800,
-              lineHeight: 0.92,
-              letterSpacing: -4,
-            }}
-          >
-            Shiven Khurdi
-            <span style={{ color: "#c6ff3a" }}>.</span>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              marginTop: 28,
-              fontSize: 40,
-              color: "#a0a09a",
-            }}
-          >
-            AI Engineer · LLM systems, multi-agent platforms & computer vision
+        <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
+          <svg width="150" height="129" viewBox="0 0 100 86">
+            <path fill="#e9e9e6" fillRule="evenodd" d="M0 0h100L50 86 0 0Zm25.5 14L50 56.4 74.5 14h-49Z" />
+          </svg>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span style={{ fontSize: 96, fontWeight: 800, letterSpacing: -4, lineHeight: 1 }}>{profile.name.toUpperCase()}</span>
+            <span style={{ fontSize: 28, color: "#9d9d99", marginTop: 16 }}>{profile.bootLine}</span>
           </div>
         </div>
-
-        {/* Bottom accent bar */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            borderTop: "1px solid rgba(237,237,234,0.14)",
-            paddingTop: 28,
-            fontSize: 24,
-            color: "#87877e",
-          }}
-        >
-          <span>M.S. Artificial Intelligence · Northeastern University</span>
-          <span style={{ color: "#c6ff3a" }}>↗</span>
-        </div>
+        <div style={{ display: "flex", fontSize: 22, color: "#6d5ae6" }}>shivenkhurdi.vercel.app</div>
       </div>
     ),
-    { ...size },
+    size,
   );
 }
