@@ -6,11 +6,11 @@ export const profile = {
   role: "AI Engineer",
   location: "Boston, MA",
   locationNote: "Open to relocate",
-  status: "Founding AI Engineer @ Interlock Systems · Harvard Innovation Labs",
+  status: "Founding AI Engineer Intern @ Interlock Systems · Harvard Innovation Labs",
   // One readable sentence for the hero.
   intro:
     "I build AI systems end to end and measure what they actually do, not what they’re supposed to.",
-  introMeta: "Founding AI Engineer at Interlock Systems (Harvard Innovation Labs) · M.S. AI at Northeastern · Boston, MA",
+  introMeta: "Founding AI Engineer Intern at Interlock Systems (Harvard Innovation Labs) · M.S. AI at Northeastern · Boston, MA",
   // One line, shown while the site boots.
   bootLine: "Build the whole system. Measure what it actually does.",
   tagline:
@@ -23,7 +23,7 @@ export const profile = {
   about: [
     "I’m a Master’s student in Artificial Intelligence at Northeastern University, and most of my work circles one question: how do you know a result is real. That applies whether the thing being measured is a model I trained or an agent about to write to someone’s database.",
     "I’ve built each layer at least once: a 394M-parameter language model pretrained from scratch (corpus, tokenizer, architecture, training loop), fine-tuning and quantization, retrieval, agents with tool use, constraint solvers, and the FastAPI, Docker, AWS, and Next.js work needed to put any of it in front of users.",
-    "Two of those projects are now papers under review at NeurIPS 2026 workshops, and in both the headline finding went against what I was hoping for. Right now I’m the Founding AI Engineer at Interlock Systems (Harvard Innovation Labs), building agent automation and verification over customers’ production ERP systems. Before Boston, I earned my CS degree at BITS Pilani’s Dubai campus.",
+    "That 394M model, sqlpup, now has an official entry on the BIRD leaderboard, and AgentRelBench, my work on agent reliability, was accepted as a poster at a NeurIPS 2026 workshop. In both, the headline finding went against what I was hoping for. Right now I’m the Founding AI Engineer Intern at Interlock Systems (Harvard Innovation Labs), building agent automation and verification over customers’ production ERP systems. Before Boston, I earned my CS degree at BITS Pilani’s Dubai campus.",
   ],
 };
 
@@ -62,7 +62,7 @@ export type Project = {
   highlights: string[];
   stack: string[];
   metric: { value: string; label: string };
-  links: { code?: string; live?: string; paper?: string };
+  links: { code?: string; live?: string; paper?: string; leaderboard?: string };
   art: PosterArt;
   hue: number;
 };
@@ -74,21 +74,24 @@ export const projects: Project[] = [
     title: "sqlpup",
     subtitle: "394M Text-to-SQL Model Built From Scratch",
     year: "2026",
-    date: "2026 08.17",
+    date: "2026 08.11",
     category: "LLM · Pretraining · Research",
     tags: ["LLM", "Pretraining", "Research"],
     blurb: "A language model built end to end for under $1,000.",
     description:
-      "A 394M-parameter text-to-SQL decoder where every stage is built for this one task: a 9.67B-token corpus, a byte-level BPE tokenizer, a Llama-style GQA architecture, a preemption-safe 4-GPU training loop, and a sandboxed execution-accuracy harness. No pretrained weights anywhere in the stack.",
+      "A 394M-parameter text-to-SQL decoder where every stage is built for this one task: a 9.67B-token corpus, a byte-level BPE tokenizer, a Llama-style GQA architecture, a preemption-safe 4-GPU training loop, a sandboxed execution-accuracy harness, and fine-tuning with SFT and GRPO over an execution reward. No pretrained weights anywhere in the stack.",
     highlights: [
-      "23.51% ± 0.38 execution accuracy on BIRD dev after fine-tuning plus GRPO over an execution reward",
-      "Against an industrially pretrained control matched to 0.8% on non-embedding parameters, test-time compute widened the gap (5.87 → 8.65 points) instead of closing it",
+      "Official BIRD leaderboard entry, scored by the BIRD team on the hidden test set: 33.15% execution accuracy with 7-sample voting, 27.33% single pass (dev: 23.51% and 19.23%)",
+      "Fine-tuned identically, Qwen2.5-0.5B (matched non-embedding size, ~1,861× more pretraining data) beats sqlpup by 5.87 points on BIRD dev at greedy decoding; more test-time compute widened the gap to 8.65 points instead of closing it",
       "Corpus, 32,768-entry tokenizer, and training loop all built from scratch, with exact-resume checkpointing that survives spot preemption",
-      "Shipped to PyPI and Hugging Face with 543 tests and CI; paper under review at a NeurIPS 2026 workshop",
+      "Open source, shipped to PyPI and Hugging Face with 543 tests and CI",
     ],
     stack: ["PyTorch", "DDP", "GRPO", "Hugging Face", "AWS", "PyPI"],
-    metric: { value: "23.51%", label: "BIRD dev execution accuracy" },
-    links: { code: "https://github.com/shivenkk/sqlpup" },
+    metric: { value: "33.15%", label: "BIRD test execution accuracy" },
+    links: {
+      code: "https://github.com/shivenkk/sqlpup",
+      leaderboard: "https://bird-bench.github.io",
+    },
     art: "waveform",
     hue: 258,
   },
@@ -98,15 +101,16 @@ export const projects: Project[] = [
     title: "AgentRelBench",
     subtitle: "Reliability Instrument for Action-Taking LLM Agents",
     year: "2026",
-    date: "2026 08.20",
+    date: "2026 08.15",
     category: "Agents · Evaluation · Research",
     tags: ["Agents", "Evaluation", "Research"],
     blurb: "Does an agent cause damage repeatably? Measured across 2,128 runs.",
     description:
       "An instrument that prices agent damage from database state diffs, deterministically and with no LLM judge anywhere in the measurement path, then measures whether that damage repeats across runs. Built over EnterpriseOps-Gym (ServiceNow AI Research and Mila).",
     highlights: [
-      "Pre-registered campaign of 2,128 runs across 33 tasks and nine models in six model families",
-      "Damage appeared in every family and was stochastic inside every damage-producing cell; no task damaged on every run, so one-shot audits are structurally blind to it",
+      "Paper accepted as a poster at the NeurIPS 2026 workshop “Who Verifies the Agents? Toward Reliable Agent Development” (Sydney, December 2026)",
+      "Pre-registered campaign of 2,128 runs across 20 tasks and nine models in six model families; no task caused damage on every run",
+      "On the development pool, a single clean run missed a damage-producing (model, task) pair 80% of the time; one model family made a gated, irreversible change while claiming it had refused",
       "Demote criteria written before data collection fired against the intended headline, and that demotion is reported in the paper",
       "176 tests and one-command reproduction; preprint at arXiv:2608.15286, and the estimator core ships separately as evalpower, a zero-dependency library",
     ],
@@ -290,7 +294,7 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     id: "interlock",
-    role: "Founding AI Engineer",
+    role: "Founding AI Engineer Intern",
     company: "Interlock Systems Inc.",
     short: "Interlock",
     logo: "/logos/interlock.png",
@@ -474,23 +478,28 @@ export const skills: { group: string; items: string[] }[] = [
 // Short feed shown in the hero HUD and on /about.
 export const updates: { date: string; title: string; href?: string }[] = [
   {
+    date: "2026 SEP",
+    title: "AgentRelBench paper accepted as a poster at a NeurIPS 2026 workshop",
+    href: "https://arxiv.org/abs/2608.15286",
+  },
+  {
     date: "2026 AUG",
     title: "AgentRelBench preprint is up on arXiv (2608.15286)",
     href: "https://arxiv.org/abs/2608.15286",
   },
   {
     date: "2026 AUG",
-    title: "sqlpup shipped to PyPI and Hugging Face; paper under review at a NeurIPS 2026 workshop",
+    title: "sqlpup released on PyPI and Hugging Face; 33.15% on the official BIRD leaderboard (hidden test set)",
     href: "https://github.com/shivenkk/sqlpup",
   },
   {
     date: "2026 JUN",
-    title: "Joined Interlock Systems (Harvard Innovation Labs) as Founding AI Engineer",
+    title: "Joined Interlock Systems (Harvard Innovation Labs) as Founding AI Engineer Intern",
   },
 ];
 
 export const affiliations: { name: string; logo: string; note: string; plate?: "light" | "dark" }[] = [
-  { name: "Interlock Systems", logo: "/logos/interlock.png", note: "Founding AI Engineer", plate: "dark" },
+  { name: "Interlock Systems", logo: "/logos/interlock.png", note: "Founding AI Engineer Intern", plate: "dark" },
   { name: "Northeastern University", logo: "/logos/northeastern.jpg", note: "M.S. AI" },
   { name: "BITS Pilani, Dubai", logo: "/logos/bits-cut.png", note: "B.E. CS" },
   { name: "ODeX Global", logo: "/logos/odex-cut.png", note: "Web Dev Intern" },

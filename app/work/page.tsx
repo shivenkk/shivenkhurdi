@@ -20,8 +20,10 @@ export default function WorkPage() {
           <h2 className="hud-label pt-1">Research</h2>
           <div>
             <p className="max-w-[60ch] font-sans text-lg leading-snug text-fg md:text-xl">
-              Two projects are papers under review at NeurIPS 2026 workshops. In both, the headline finding went
-              against what I was hoping for, and the papers say so.
+              The AgentRelBench paper was accepted as a poster at the NeurIPS 2026 workshop “Who Verifies the
+              Agents? Toward Reliable Agent Development” (Sydney, December 2026), and sqlpup is open source, with an
+              official entry on the BIRD leaderboard. In both, the headline finding went against what I was hoping
+              for, and the write-ups say so.
             </p>
             <ul className="mt-5 flex flex-wrap gap-x-8 gap-y-3">
               {projects

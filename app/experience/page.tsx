@@ -35,7 +35,7 @@ export default function ExperiencePage() {
             {[
               ["Now", `${experience[0].role}, ${experience[0].short}`],
               ["Studying", `${education[0].degree}, ${education[0].school} · ${education[0].gpa}`],
-              ["Research", "2 papers under review, NeurIPS 2026 workshops"],
+              ["Research", "Accepted poster, NeurIPS 2026 workshop · BIRD leaderboard entry"],
               ["Location", `${profile.location} · ${profile.locationNote}`],
             ].map(([k, v]) => (
               <div key={k}>
