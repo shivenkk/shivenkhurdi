@@ -82,7 +82,7 @@ export const projects: Project[] = [
       "A 394M-parameter text-to-SQL decoder where every stage is built for this one task: a 9.67B-token corpus, a byte-level BPE tokenizer, a Llama-style GQA architecture, a preemption-safe 4-GPU training loop, a sandboxed execution-accuracy harness, and fine-tuning with SFT and GRPO over an execution reward. No pretrained weights anywhere in the stack.",
     highlights: [
       "Official BIRD leaderboard entry, scored by the BIRD team on the hidden test set: 33.15% execution accuracy with 7-sample voting, 27.33% single pass (dev: 23.51% and 19.23%)",
-      "Fine-tuned identically, Qwen2.5-0.5B (matched non-embedding size, ~1,861× more pretraining data) beats sqlpup by 5.87 points on BIRD dev at greedy decoding; more test-time compute widened the gap to 8.65 points instead of closing it",
+      "Fine-tuned identically, Qwen2.5-0.5B (matched non-embedding size, ~1,861× more pretraining data) beats sqlpup by 5.87 points on BIRD dev at greedy decoding; even with compaction and 7-sample voting, sqlpup’s SFT model only reached about Qwen’s plain greedy accuracy (22.84% vs 23.27%)",
       "Corpus, 32,768-entry tokenizer, and training loop all built from scratch, with exact-resume checkpointing that survives spot preemption",
       "Open source, shipped to PyPI and Hugging Face with 543 tests and CI",
     ],
