@@ -38,6 +38,11 @@ export default function WorkPage() {
                         arXiv <ArrowUpRight size={11} className="ml-1" />
                       </a>
                     )}
+                    {p.links.openreview && (
+                      <a href={p.links.openreview} target="_blank" rel="noreferrer noopener" className="chip text-fg hover:border-fg">
+                        OpenReview <ArrowUpRight size={11} className="ml-1" />
+                      </a>
+                    )}
                     {p.links.code && (
                       <a href={p.links.code} target="_blank" rel="noreferrer noopener" className="chip text-fg hover:border-fg">
                         Code <ArrowUpRight size={11} className="ml-1" />

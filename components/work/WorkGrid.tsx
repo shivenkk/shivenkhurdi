@@ -36,6 +36,11 @@ export default function WorkGrid() {
                 Paper <ArrowUpRight size={12} />
               </a>
             )}
+            {p.links.openreview && (
+              <a href={p.links.openreview} target="_blank" rel="noreferrer noopener" className="hud inline-flex items-center gap-1.5 text-fg hover:underline">
+                OpenReview <ArrowUpRight size={12} />
+              </a>
+            )}
             {p.links.leaderboard && (
               <a href={p.links.leaderboard} target="_blank" rel="noreferrer noopener" className="hud inline-flex items-center gap-1.5 text-fg hover:underline">
                 Leaderboard <ArrowUpRight size={12} />

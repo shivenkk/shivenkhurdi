@@ -62,7 +62,7 @@ export type Project = {
   highlights: string[];
   stack: string[];
   metric: { value: string; label: string };
-  links: { code?: string; live?: string; paper?: string; leaderboard?: string };
+  links: { code?: string; live?: string; paper?: string; openreview?: string; leaderboard?: string };
   art: PosterArt;
   hue: number;
 };
@@ -119,6 +119,7 @@ export const projects: Project[] = [
     links: {
       code: "https://github.com/shivenkk/agentrelbench",
       paper: "https://arxiv.org/abs/2608.15286",
+      openreview: "https://openreview.net/forum?id=eQH5SQYour",
     },
     art: "matrix",
     hue: 350,
@@ -480,7 +481,7 @@ export const updates: { date: string; title: string; href?: string }[] = [
   {
     date: "2026 SEP",
     title: "AgentRelBench paper accepted as a poster at a NeurIPS 2026 workshop",
-    href: "https://arxiv.org/abs/2608.15286",
+    href: "https://openreview.net/forum?id=eQH5SQYour",
   },
   {
     date: "2026 AUG",
