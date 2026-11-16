@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: `${profile.name} · ${profile.role}`,
     description:
-      "AI engineer working on LLM systems, agents, and evaluation. Founding AI Engineer Intern at Interlock Systems, M.S. AI at Northeastern.",
+      "AI engineer working on LLM systems, agents, and evaluation. Founding AI Engineer (Co-op) at Interlock Systems, M.S. AI at Northeastern.",
     siteName: profile.name,
   },
   twitter: {

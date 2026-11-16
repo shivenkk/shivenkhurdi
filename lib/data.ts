@@ -6,11 +6,11 @@ export const profile = {
   role: "AI Engineer",
   location: "Boston, MA",
   locationNote: "Open to relocate",
-  status: "Founding AI Engineer Intern @ Interlock Systems · Harvard Innovation Labs",
+  status: "Founding AI Engineer (Co-op) @ Interlock Systems · Harvard Innovation Labs",
   // One readable sentence for the hero.
   intro:
     "I build AI systems end to end and measure what they actually do, not what they’re supposed to.",
-  introMeta: "Founding AI Engineer Intern at Interlock Systems (Harvard Innovation Labs) · M.S. AI at Northeastern · Boston, MA",
+  introMeta: "Founding AI Engineer (Co-op) at Interlock Systems (Harvard Innovation Labs) · M.S. AI at Northeastern · Boston, MA",
   // One line, shown while the site boots.
   bootLine: "Build the whole system. Measure what it actually does.",
   tagline:
@@ -23,7 +23,7 @@ export const profile = {
   about: [
     "I’m a Master’s student in Artificial Intelligence at Northeastern University, and most of my work circles one question: how do you know a result is real. That applies whether the thing being measured is a model I trained or an agent about to write to someone’s database.",
     "I’ve built each layer at least once: a 394M-parameter language model pretrained from scratch (corpus, tokenizer, architecture, training loop), fine-tuning and quantization, retrieval, agents with tool use, constraint solvers, and the FastAPI, Docker, AWS, and Next.js work needed to put any of it in front of users.",
-    "That 394M model, sqlpup, now has an official entry on the BIRD leaderboard, and AgentRelBench, my work on agent reliability, was accepted as a poster at a NeurIPS 2026 workshop. In both, the headline finding went against what I was hoping for. Right now I’m the Founding AI Engineer Intern at Interlock Systems (Harvard Innovation Labs), building agent automation and verification over customers’ production ERP systems. Before Boston, I earned my CS degree at BITS Pilani’s Dubai campus.",
+    "That 394M model, sqlpup, now has an official entry on the BIRD leaderboard, and AgentRelBench, my work on agent reliability, was accepted as a poster at a NeurIPS 2026 workshop. In both, the headline finding went against what I was hoping for. Right now I’m on co-op as the Founding AI Engineer at Interlock Systems (Harvard Innovation Labs), building agent automation and verification over customers’ production ERP systems. Before Boston, I earned my CS degree at BITS Pilani’s Dubai campus.",
   ],
 };
 
@@ -115,7 +115,7 @@ export const projects: Project[] = [
       "176 tests and one-command reproduction; preprint at arXiv:2608.15286, and the estimator core ships separately as evalpower, a zero-dependency library",
     ],
     stack: ["Python", "Clopper-Pearson", "Docker", "Pre-registration", "CI"],
-    metric: { value: "2,128", label: "pre-registered agent runs" },
+    metric: { value: "2,128", label: "agent runs" },
     links: {
       code: "https://github.com/shivenkk/agentrelbench",
       paper: "https://arxiv.org/abs/2608.15286",
@@ -295,7 +295,7 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     id: "interlock",
-    role: "Founding AI Engineer Intern",
+    role: "Founding AI Engineer (Co-op)",
     company: "Interlock Systems Inc.",
     short: "Interlock",
     logo: "/logos/interlock.png",
@@ -317,7 +317,7 @@ export const experience: Experience[] = [
   },
   {
     id: "odex",
-    role: "Web Development Intern",
+    role: "Web Developer (Co-op)",
     company: "ODeX Global",
     short: "ODeX",
     logo: "/logos/odex-cut.png",
@@ -495,15 +495,15 @@ export const updates: { date: string; title: string; href?: string }[] = [
   },
   {
     date: "2026 JUN",
-    title: "Joined Interlock Systems (Harvard Innovation Labs) as Founding AI Engineer Intern",
+    title: "Joined Interlock Systems (Harvard Innovation Labs) as Founding AI Engineer (Co-op)",
   },
 ];
 
 export const affiliations: { name: string; logo: string; note: string; plate?: "light" | "dark" }[] = [
-  { name: "Interlock Systems", logo: "/logos/interlock.png", note: "Founding AI Engineer Intern", plate: "dark" },
+  { name: "Interlock Systems", logo: "/logos/interlock.png", note: "Founding AI Engineer (Co-op)", plate: "dark" },
   { name: "Northeastern University", logo: "/logos/northeastern.jpg", note: "M.S. AI" },
   { name: "BITS Pilani, Dubai", logo: "/logos/bits-cut.png", note: "B.E. CS" },
-  { name: "ODeX Global", logo: "/logos/odex-cut.png", note: "Web Dev Intern" },
+  { name: "ODeX Global", logo: "/logos/odex-cut.png", note: "Web Developer (Co-op)" },
   { name: "Tendercare FZE", logo: "/logos/tendercare-cut.png", note: "Engineer Intern" },
 ];
 
